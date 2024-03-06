@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1709748450 source:c:\users\taras\desktop\куку\modulesyarovets\main.cpp
+	<iostream>
+	<cmath>
+	<iomanip>
+
