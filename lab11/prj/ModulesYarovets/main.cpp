@@ -199,7 +199,7 @@ void InputGenderOrTypeWork(string title, char &input, char checkMark, char defau
     }
 }
 
-void InputEducation(Employee &personalcard){
+void InputEducation(Employee &account){
     int numberOfEducation = 0;
     int choiseAction = 0;
 
@@ -223,35 +223,35 @@ void InputEducation(Employee &personalcard){
         InputNumber(title, choiseAction);
 
         switch(choiseAction){
-            case 1: personalcard.education[i] = Employee::basicSecondary; break;
-            case 2: personalcard.education[i] = Employee::basicHigher; break;
-            case 3: personalcard.education[i] = Employee::vocational; break;
-            case 4: personalcard.education[i] = Employee::incompHigher; break;
-            case 5: personalcard.education[i] = Employee::basicHigher; break;
-            case 6: personalcard.education[i] = Employee::higher; break;
+            case 1: account.education[i] = Employee::basicSecondary; break;
+            case 2: account.education[i] = Employee::basicHigher; break;
+            case 3: account.education[i] = Employee::vocational; break;
+            case 4: account.education[i] = Employee::incompHigher; break;
+            case 5: account.education[i] = Employee::basicHigher; break;
+            case 6: account.education[i] = Employee::higher; break;
             default: cout << "Немає такого варіанту відповіді" << endl; i--; continue;
         }
 
-        InputString("В якому закладі здобували освіту?", personalcard.placeOfEducation[i]);
+        InputString("В якому закладі здобували освіту?", account.placeOfEducation[i]);
     }
 }
 
-void InputWorkExp(Employee &personalcard){
+void InputWorkExp(Employee &account){
     bool iscorrect = false;
 
     do{
         InputThreeNumber(
-            personalcard.workExp.days,
-            personalcard.workExp.months,
-            personalcard.workExp.years,
+            account.workExp.days,
+            account.workExp.months,
+            account.workExp.years,
             ',',
             "Введіть ваш досвід роботи в форматі{день,місяць,рік}",
             "Досвід роботи заповнений неправильно"
         );
 
-        if(personalcard.workExp.days < 0 ||
-            personalcard.workExp.months < 0 ||
-            personalcard.workExp.years < 0){
+        if(account.workExp.days < 0 ||
+            account.workExp.months < 0 ||
+            account.workExp.years < 0){
             cout << "Введіть ваш досвід роботи в форматі{день місяць рік}" << endl;
             continue;
         }
@@ -276,48 +276,48 @@ bool YouWorked(){
     } while(true);
 }
 
-Employee InputPersonalCard() {
-    Employee personalcard;
+Employee InputAccount() {
+    Employee account;
     cin.ignore();
-    InputDate("Дата заповнення: ", personalcard.creationDate);
+    InputDate("Дата заповнення: ", account.creationDate);
 
 
-    InputNumber("Табельний номер:", personalcard.regNum);
+    InputNumber("Табельний номер:", account.regNum);
 
-    InputNumber("Індифікаційний номер:", personalcard.ID);
+    InputNumber("Індифікаційний номер:", account.ID);
 
-    InputGenderOrTypeWork("Стать(m - чоловік, w - жінка):", personalcard.gender, 'm', 'w');
+    InputGenderOrTypeWork("Стать(m - чоловік, w - жінка):", account.gender, 'm', 'w');
 
-    InputGenderOrTypeWork("Вид роботи(f - основна, p - за сумісництвом):", personalcard.typeOfWork, 'f', 'p');
+    InputGenderOrTypeWork("Вид роботи(f - основна, p - за сумісництвом):", account.typeOfWork, 'f', 'p');
 
-    InputString("ПІБ працівника:", personalcard.fullName);
+    InputString("ПІБ працівника:", account.fullName);
 
-    InputDate("День народження: ", personalcard.birthday);
+    InputDate("День народження: ", account.birthday);
 
-    InputString("Громадянство:", personalcard.citizenship);
+    InputString("Громадянство:", account.citizenship);
 
-    InputEducation(personalcard);
+    InputEducation(account);
 
     bool isjob = YouWorked();
 
     if(isjob){
-        InputString("Останнє місце роботи:", personalcard.lastJobPlace);
+        InputString("Останнє місце роботи:", account.lastJobPlace);
 
-        InputString("Посада:", personalcard.lastJob);
+        InputString("Посада:", account.lastJob);
 
-        InputWorkExp(personalcard);
+        InputWorkExp(account);
     }
 
-    InputString("Місце проживання:", personalcard.placeOfLiving);
+    InputString("Місце проживання:", account.placeOfLiving);
 
-    InputString("Паспортні дані:", personalcard.passportInfo);
+    InputString("Паспортні дані:", account.passportInfo);
 
-    InputString("Додаткова інформація:", personalcard.additionalInfo);
+    InputString("Додаткова інформація:", account.additionalInfo);
 
     if(isjob){
-        InputDate("Дата звільнення: ", personalcard.dateOfDissial);
+        InputDate("Дата звільнення: ", account.dateOfDissial);
 
-        InputString("Причина звільнення:", personalcard.reasonForDissial);
+        InputString("Причина звільнення:", account.reasonForDissial);
     }
 
 
@@ -325,9 +325,9 @@ Employee InputPersonalCard() {
     cout << setw(20) << "" << "+         Дані успішно занесено         +" << endl;
     cout << setw(20) << "" << "+++++++++++++++++++++++++++++++++++++++++" << endl << endl;
 
-    return personalcard;
+    return account;
 }
 
 void addToDataBase(vector<Employee> &database){
-    database.push_back(InputPersonalCard());
+    database.push_back(InputAccount());
 }
