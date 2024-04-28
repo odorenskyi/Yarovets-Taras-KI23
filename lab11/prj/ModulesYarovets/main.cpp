@@ -1,6 +1,73 @@
-#include "../struct_type_project_2.h"
+#include "Yarovets_h.h"
 
 using namespace std;
+
+void saveDataBase(vector<Employee> &database, string filename) {
+    ofstream bout (filename, ios::out | ios::binary);
+    if (bout.is_open()) {
+        for (int i = 0, lenOfType; i < database.size(); i++) {
+            bout.write((char*)&database[i], sizeof(date));
+
+            bout.write((char*)&database[i].regNum, sizeof(int));
+            bout.write((char*)&database[i].ID, sizeof(int));
+
+            bout.write(&database[i].gender, sizeof(char));
+            bout.write(&database[i].typeOfWork, sizeof(char));
+
+            lenOfType = int(database[i].fullName.size());
+            bout.write((char*)&lenOfType, sizeof(int));
+            bout.write(&database[i].fullName[0], lenOfType);
+
+            bout.write((char*)&database[i].birthday, sizeof(date));
+
+            lenOfType = int(database[i].citizenship.size());
+            bout.write((char*)&lenOfType, sizeof(int));
+            bout.write(&database[i].citizenship[0], lenOfType);
+
+            char numOfEd = 0;
+            for (; numOfEd < 4 && database[i].placeOfEducation[numOfEd] != ""; numOfEd++);
+            bout.write((char*)&numOfEd, sizeof(char));
+
+            for (int j = 0; j < numOfEd; j++) {
+                bout.write((char*)&database[i].education[j], sizeof(int));
+
+                lenOfType = int(database[i].placeOfEducation[j].size());
+                bout.write((char*)&lenOfType, sizeof(int));
+                bout.write(&database[i].placeOfEducation[j][0], lenOfType);
+            }
+
+            lenOfType = int(database[i].lastJobPlace.size());
+            bout.write((char*)&lenOfType, sizeof(int));
+            bout.write(&database[i].lastJobPlace[0], lenOfType);
+            lenOfType = int(database[i].lastJob.size());
+            bout.write((char*)&lenOfType, sizeof(int));
+            bout.write(&database[i].lastJob[0], lenOfType);
+
+            bout.write((char*)&database[i].workExp, sizeof(short)*3);
+
+            lenOfType = int(database[i].placeOfLiving.size());
+            bout.write((char*)&lenOfType, sizeof(int));
+            bout.write(&database[i].placeOfLiving[0], lenOfType);
+            lenOfType = int(database[i].passportInfo.size());
+            bout.write((char*)&lenOfType, sizeof(int));
+            bout.write(&database[i].passportInfo[0], lenOfType);
+            lenOfType = int(database[i].additionalInfo.size());
+            bout.write((char*)&lenOfType, sizeof(int));
+            bout.write(&database[i].additionalInfo[0], lenOfType);
+
+            bout.write((char*)&database[i].dateOfDissial.day, sizeof(date));
+
+            lenOfType = int(database[i].reasonForDissial.size());
+            bout.write((char*)&lenOfType, sizeof(int));
+            bout.write(&database[i].reasonForDissial[0], lenOfType);
+        }
+        bout.close();
+    }
+    else {
+        cerr << "\nНеможливо завантажити файл '" << filename << "'.";
+        exit(1);
+    }
+}
 
 void PrintTitle(string title) {
     cout << title << endl;
@@ -259,4 +326,8 @@ Employee InputPersonalCard() {
     cout << setw(20) << "" << "+++++++++++++++++++++++++++++++++++++++++" << endl << endl;
 
     return personalcard;
+}
+
+void addToDataBase(vector<Employee> &database){
+    database.push_back(InputPersonalCard());
 }
