@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1715945806 source:c:\users\taras\desktop\куку\modulesyarovets\main.cpp
+	<iostream>
+	<cmath>
+	<iomanip>
+	<bits/stdc++.h>
+	<string>
+	<fstream>
+	<ctime>
+
+1711996486 source:c:\users\taras\desktop\інститут\бтмтп\2 семестр\yarovets-taras-ki23\lab08\prj\modulesyarovets\main.cpp
+	<iostream>
+	<cmath>
+	<iomanip>
+	<bits/stdc++.h>
+	<string>
+
+1712033951 source:c:\users\taras\desktop\інститут\бтмтп\2 семестр\yarovets-taras-ki23\lab09\prj\modulesyarovets\main.cpp
+	<iostream>
+	<cmath>
+	<iomanip>
+	<bits/stdc++.h>
+	<string>
+
