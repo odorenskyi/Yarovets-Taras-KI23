@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1715949236 source:c:\users\taras\desktop\куку\testdriver\main.cpp
+	<iostream>
+	"ModulesYarovets.h"
+	<fstream>
+
+1715945829 c:\users\taras\desktop\куку\modulesyarovets.h
+
